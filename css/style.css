@@ -23,12 +23,16 @@ body {
   align-items: center;
 
   background:silver;
+  border: 8px rgb(128, 128, 128) solid;
+  border-radius: 16px;
+  box-shadow: 4px 4px black;
   min-width: 400px;
   min-height: 600px;
 }
 
 #display,
-#functions button {
+#functions button,
+#digits button {
   font-size: 36px;
 }
 
@@ -36,6 +40,8 @@ body {
   background: #4cbe48;
   font-family: led_digital_7, sans-serif;
   word-wrap: break-word;
+  border: 4px darkgreen solid;
+  border-radius: 8px;
   min-width: 80%;
   max-width: 80%;
   min-height: 3em;
@@ -48,15 +54,42 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
   width: 80%;
   /* height: 200px; */
   margin-bottom: 10%;
+  gap: 16px;
 }
 
 #functions button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  flex-basis: 20%;
+  /* width: 20%; */
   /* height: 20%; */
+}
+
+#digits {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 80%;
+  /* height: 200px; */
+  margin-bottom: 10%;
+  gap: 16px;
+}
+
+#digits button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 25%;
+  /* width: 25%; */
+  height: 1.5em;
+}
+
+.unused {
+  visibility: hidden;
 }
