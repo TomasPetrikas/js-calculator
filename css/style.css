@@ -1,0 +1,62 @@
+@font-face {
+  font-family: led_digital_7;
+  src: url(../font/led_digital_7.ttf);
+  unicode-range: U+030-039;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background:silver;
+  min-width: 400px;
+  min-height: 600px;
+}
+
+#display,
+#functions button {
+  font-size: 36px;
+}
+
+#display {
+  background: #4cbe48;
+  font-family: led_digital_7, sans-serif;
+  word-wrap: break-word;
+  min-width: 80%;
+  max-width: 80%;
+  min-height: 3em;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  padding: 12px;
+}
+
+#functions {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 80%;
+  /* height: 200px; */
+  margin-bottom: 10%;
+}
+
+#functions button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  /* height: 20%; */
+}
