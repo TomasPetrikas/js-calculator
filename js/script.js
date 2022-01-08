@@ -1,3 +1,4 @@
+const MAX_DISPLAY_LENGTH = 15;
 let displayValue = "";
 
 function add(a, b) {
@@ -25,9 +26,18 @@ function updateDisplay() {
   display.textContent = displayValue;
 }
 
+function clearDisplay() {
+  displayValue = "";
+
+  const display = document.querySelector("#display");
+  display.textContent = displayValue;
+}
+
 function addDigit(e) {
-  displayValue += e.target.value;
-  updateDisplay();
+  if (displayValue.length + e.target.value.length <= MAX_DISPLAY_LENGTH) {
+    displayValue += e.target.value;
+    updateDisplay();
+  }
 }
 
 const zero = document.querySelector("#zero");
@@ -41,6 +51,8 @@ const seven = document.querySelector("#seven");
 const eight = document.querySelector("#eight");
 const nine = document.querySelector("#nine");
 
+const clear = document.querySelector("#clear");
+
 zero.addEventListener("click", addDigit);
 one.addEventListener("click", addDigit);
 two.addEventListener("click", addDigit);
@@ -51,3 +63,5 @@ six.addEventListener("click", addDigit);
 seven.addEventListener("click", addDigit);
 eight.addEventListener("click", addDigit);
 nine.addEventListener("click", addDigit);
+
+clear.addEventListener("click", clearDisplay);
