@@ -88,6 +88,8 @@ body {
   flex-basis: 25%;
   /* width: 25%; */
   height: 1.5em;
+  background: rgb(48, 48, 48);
+  color: white;
 }
 
 .unused {
