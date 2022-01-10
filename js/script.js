@@ -1,5 +1,8 @@
 const MAX_DISPLAY_LENGTH = 15;
 let displayValue = "";
+let currentOperation = null;
+let firstOperand = null;
+let clearNextInput = false;
 
 function add(a, b) {
   return a + b;
@@ -28,15 +31,76 @@ function updateDisplay() {
 
 function clearDisplay() {
   displayValue = "";
+  // currentOperation = null;
+  // firstOperand = null;
 
-  const display = document.querySelector("#display");
-  display.textContent = displayValue;
+  updateDisplay();
 }
 
-function addDigit(e) {
+function addSymbol(e) {
+  if (clearNextInput) {
+    firstOperand = displayValue;
+    clearDisplay();
+    clearNextInput = false;
+  }
+
   if (displayValue.length + e.target.value.length <= MAX_DISPLAY_LENGTH) {
     displayValue += e.target.value;
     updateDisplay();
+  }
+}
+
+function setOperation(e) {
+  switch(e.target.value) {
+    case "add":
+      currentOperation = add;
+      break;
+    case "subtract":
+      currentOperation = subtract;
+      break;
+    case "multiply":
+      currentOperation = multiply;
+      break;
+    case "divide":
+      currentOperation = divide;
+      break;
+    default:
+      console.log("Something went horribly wrong");
+      currentOperation = null;
+  }
+
+  clearNextInput = true;
+}
+
+function setEqual() {
+  // console.log("First operand: " + firstOperand);
+  // console.log("Current operation: " + currentOperation);
+  if (firstOperand !== null && currentOperation !== null) {
+    // Convert operands from string to number with "+"
+    displayValue = operate(+firstOperand, currentOperation, +displayValue);
+    displayValue = truncateDisplay();
+
+    // console.log(displayValue);
+    updateDisplay();
+
+    currentOperation = null;
+    firstOperand = null;
+  }
+}
+
+// Shorten displayValue to fit in display, if possible
+// Return displayValue as number so integers don't display as XYZ.00000...
+function truncateDisplay() {
+  console.log(typeof displayValue);
+  if (displayValue.toFixed(0).length > MAX_DISPLAY_LENGTH) {
+    return +displayValue.toFixed(0);
+  }
+  else {
+    for (let i = MAX_DISPLAY_LENGTH - 1; i >= 0; i--) {
+      if (displayValue.toFixed(i).length <= MAX_DISPLAY_LENGTH) {
+        return +displayValue.toFixed(i);
+      }
+    }
   }
 }
 
@@ -51,17 +115,27 @@ const seven = document.querySelector("#seven");
 const eight = document.querySelector("#eight");
 const nine = document.querySelector("#nine");
 
+const addBtn = document.querySelector("#add");
+const subtractBtn = document.querySelector("#subtract");
+const multiplyBtn = document.querySelector("#multiply");
+const divideBtn = document.querySelector("#divide");
+const equals = document.querySelector("#equals");
 const clear = document.querySelector("#clear");
 
-zero.addEventListener("click", addDigit);
-one.addEventListener("click", addDigit);
-two.addEventListener("click", addDigit);
-three.addEventListener("click", addDigit);
-four.addEventListener("click", addDigit);
-five.addEventListener("click", addDigit);
-six.addEventListener("click", addDigit);
-seven.addEventListener("click", addDigit);
-eight.addEventListener("click", addDigit);
-nine.addEventListener("click", addDigit);
+zero.addEventListener("click", addSymbol);
+one.addEventListener("click", addSymbol);
+two.addEventListener("click", addSymbol);
+three.addEventListener("click", addSymbol);
+four.addEventListener("click", addSymbol);
+five.addEventListener("click", addSymbol);
+six.addEventListener("click", addSymbol);
+seven.addEventListener("click", addSymbol);
+eight.addEventListener("click", addSymbol);
+nine.addEventListener("click", addSymbol);
 
+addBtn.addEventListener("click", setOperation);
+subtractBtn.addEventListener("click", setOperation);
+multiplyBtn.addEventListener("click", setOperation);
+divideBtn.addEventListener("click", setOperation);
+equals.addEventListener("click", setEqual);
 clear.addEventListener("click", clearDisplay);
