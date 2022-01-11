@@ -26,8 +26,8 @@ body {
   border: 8px rgb(128, 128, 128) solid;
   border-radius: 16px;
   box-shadow: 4px 4px black;
-  min-width: 400px;
-  min-height: 600px;
+  /* min-width: 400px; */
+  /* min-height: 600px; */
 }
 
 #display,
