@@ -1,3 +1,7 @@
+// This project was a bit of a slog to get through. There are various bugs
+// and I wanted to implement more features, but I also want to move on.
+// It'll do.
+
 const MAX_DISPLAY_LENGTH = 15;
 let displayValue = "";
 let currentOperation = null;
@@ -80,8 +84,23 @@ function setOperation(e) {
 }
 
 function changeSign() {
-  displayValue *= -1;
+  // This doesn't work when floating points get involved
+  // displayValue *= -1;
+
+  if (displayValue.includes("-")) {
+    displayValue = displayValue.slice(1);
+  }
+  else {
+    displayValue = "-" + displayValue;
+  }
   updateDisplay();
+}
+
+function addFloatingPoint() {
+  if (displayValue.includes(".") === false) {
+    displayValue += ".";
+    updateDisplay();
+  }
 }
 
 function setEqual() {
