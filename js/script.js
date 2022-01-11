@@ -87,17 +87,20 @@ function changeSign() {
   // This doesn't work when floating points get involved
   // displayValue *= -1;
 
-  if (displayValue.includes("-")) {
-    displayValue = displayValue.slice(1);
+  if (displayValue.length >= 1) {
+    if (displayValue.includes("-")) {
+      displayValue = displayValue.slice(1);
+    }
+    else {
+      displayValue = "-" + displayValue;
+    }
+    
+    updateDisplay();
   }
-  else {
-    displayValue = "-" + displayValue;
-  }
-  updateDisplay();
 }
 
 function addFloatingPoint() {
-  if (displayValue.includes(".") === false) {
+  if (displayValue.includes(".") === false && displayValue.length >= 1) {
     displayValue += ".";
     updateDisplay();
   }
