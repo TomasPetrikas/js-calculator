@@ -79,6 +79,11 @@ function setOperation(e) {
   clearNextInput = true;
 }
 
+function changeSign() {
+  displayValue *= -1;
+  updateDisplay();
+}
+
 function setEqual() {
   // console.log("First operand: " + firstOperand);
   // console.log("Current operation: " + currentOperation);
@@ -129,6 +134,9 @@ const divideBtn = document.querySelector("#divide");
 const equals = document.querySelector("#equals");
 const clear = document.querySelector("#clear");
 
+const sign = document.querySelector("#sign");
+const floatingPoint = document.querySelector("#floating-point");
+
 zero.addEventListener("click", addSymbol);
 one.addEventListener("click", addSymbol);
 two.addEventListener("click", addSymbol);
@@ -146,3 +154,6 @@ multiplyBtn.addEventListener("click", setOperation);
 divideBtn.addEventListener("click", setOperation);
 equals.addEventListener("click", setEqual);
 clear.addEventListener("click", clearDisplay);
+
+sign.addEventListener("click", changeSign);
+floatingPoint.addEventListener("click", addFloatingPoint);
