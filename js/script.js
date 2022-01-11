@@ -3,6 +3,7 @@
 // It'll do.
 
 const MAX_DISPLAY_LENGTH = 15;
+const DIGITS = "0123456789";
 let displayValue = "";
 let currentOperation = null;
 let firstOperand = null;
@@ -56,6 +57,28 @@ function addSymbol(e) {
   }
 }
 
+function addSymbolKeyboard(e) {
+  // Mostly copied from above, sorry
+  if (DIGITS.includes(e.key)) {
+    if (clearNextInput) {
+      firstOperand = displayValue;
+      clearDisplay();
+      clearNextInput = false;
+    }
+  
+    if (displayValue.length + e.key.length <= MAX_DISPLAY_LENGTH) {
+      displayValue += e.key;
+      updateDisplay();
+    }
+  }
+  else if (e.key === ".") {
+    addFloatingPoint();
+  }
+  else if (e.key === "-") {
+    changeSign();
+  }
+}
+
 function setOperation(e) {
   if (currentOperation !== null) {
     setEqual();
@@ -94,7 +117,7 @@ function changeSign() {
     else {
       displayValue = "-" + displayValue;
     }
-    
+
     updateDisplay();
   }
 }
@@ -125,7 +148,7 @@ function setEqual() {
 // Shorten displayValue to fit in display, if possible
 // Return displayValue as number so integers don't display as XYZ.00000...
 function truncateDisplay() {
-  console.log(typeof displayValue);
+  // console.log(typeof displayValue);
   if (displayValue.toFixed(0).length > MAX_DISPLAY_LENGTH) {
     return +displayValue.toFixed(0);
   }
@@ -179,3 +202,6 @@ clear.addEventListener("click", clearDisplay);
 
 sign.addEventListener("click", changeSign);
 floatingPoint.addEventListener("click", addFloatingPoint);
+
+// Keyboard shortcuts
+window.addEventListener("keydown", addSymbolKeyboard);
