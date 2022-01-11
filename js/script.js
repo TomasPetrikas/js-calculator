@@ -29,6 +29,8 @@ function updateDisplay() {
   display.textContent = displayValue;
 }
 
+// Does not clear currentOperation and firstOperand, those are handled in
+// other functions
 function clearDisplay() {
   displayValue = "";
   // currentOperation = null;
@@ -51,6 +53,11 @@ function addSymbol(e) {
 }
 
 function setOperation(e) {
+  if (currentOperation !== null) {
+    setEqual();
+    firstOperand = displayValue;
+  }
+
   switch(e.target.value) {
     case "add":
       currentOperation = add;
