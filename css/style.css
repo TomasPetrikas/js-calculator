@@ -94,6 +94,10 @@ body {
   color: white;
 }
 
+#digits button:hover {
+  opacity: 80%;
+}
+
 .unused {
   visibility: hidden;
 }
