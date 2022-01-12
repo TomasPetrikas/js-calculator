@@ -129,6 +129,23 @@ function addFloatingPoint() {
   }
 }
 
+function removeLastSymbol() {
+  displayValue = displayValue.slice(0, displayValue.length - 1);
+
+  // Check final character for ".", "-", or anything else
+  while (displayValue) {
+    const finalChar = displayValue[displayValue.length - 1];
+    if (DIGITS.includes(finalChar)) {
+      break;
+    }
+    else {
+      displayValue = displayValue.slice(0, displayValue.length - 1);
+    }
+  }
+
+  updateDisplay();
+}
+
 function setEqual() {
   // console.log("First operand: " + firstOperand);
   // console.log("Current operation: " + currentOperation);
@@ -178,6 +195,7 @@ const multiplyBtn = document.querySelector("#multiply");
 const divideBtn = document.querySelector("#divide");
 const equals = document.querySelector("#equals");
 const clear = document.querySelector("#clear");
+const undo = document.querySelector("#undo");
 
 const sign = document.querySelector("#sign");
 const floatingPoint = document.querySelector("#floating-point");
@@ -199,6 +217,7 @@ multiplyBtn.addEventListener("click", setOperation);
 divideBtn.addEventListener("click", setOperation);
 equals.addEventListener("click", setEqual);
 clear.addEventListener("click", clearDisplay);
+undo.addEventListener("click", removeLastSymbol);
 
 sign.addEventListener("click", changeSign);
 floatingPoint.addEventListener("click", addFloatingPoint);
